@@ -3,7 +3,7 @@ mod utils;
 mod config;
 
 pub use utils::{process_error_output, highlight_text, diff_text};
-pub use config::DiffConfig;
+pub use config::{DiffConfig, RequestProfile, LoadConfig, DiffProfile, ResponseProfile, RequestConfig, get_status_text, get_header_text, get_body_text, ResponseExt, ValidateConfig};
 
 // 提供解析参数给外部使用
 #[derive(Debug, Default, PartialEq, Eq)]

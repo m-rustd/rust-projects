@@ -1,4 +1,4 @@
-use xdiff::DiffConfig;
+use xdiff::{DiffConfig, LoadConfig};
 
 #[tokio::test]
 async fn config_load_yaml() {

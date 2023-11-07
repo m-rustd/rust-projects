@@ -20,6 +20,8 @@ todo:
       - age
       - cf-cache-status
       - nel
+      - reporting-endpoints
+      - etag
     skip_body:
       - id
 rust:

@@ -1,0 +1,53 @@
+---
+todo:
+  req1:
+    method: GET
+    url: https://jsonplaceholder.typicode.com/todos/1
+    params: "fgasfsdf"
+  req2:
+    method: GET
+    url: https://jsonplaceholder.typicode.com/todos/2
+    params:
+      hello: world
+  resp:
+    skip_headers:
+      - date
+      - x-ratelimit-limit
+      - x-ratelimit-remaining
+      - x-ratelimit-reset
+      - vary
+      - cache-control
+      - expires
+      - etag
+      - via
+      - cf-cache-status
+      - expect-ct
+      - report-to
+      - cf-ray
+    skip_body:
+      - skip-body
+      - id
+rust:
+  req1:
+    method: GET
+    url: https://www.rust-lang.org/
+    headers:
+      user-agent: Aloha
+    params:
+      hello: world
+    body:
+      body_hello: world
+  req2:
+    method: GET
+    url: https://www.rust-lang.org/
+    params: {}
+    body:
+      body_hello: world
+  resp:
+    skip_headers:
+      - set-cookie
+      - date
+      - via
+      - x-amz-cf-id
+    skip_body:
+      - skip-body

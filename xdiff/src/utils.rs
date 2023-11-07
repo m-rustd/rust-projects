@@ -96,7 +96,6 @@ pub fn diff_text(text1: &str, text2: &str) -> anyhow::Result<(String, String, St
                 
                
                 for (emphasized, value) in change.iter_strings_lossy() {
-                    println!("emphasized={}", emphasized);
                     match change.tag() {
                         ChangeTag::Delete => {
                           write!(&mut output1, "{}", s.apply_to(value.clone()))?;

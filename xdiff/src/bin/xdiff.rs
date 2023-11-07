@@ -1,6 +1,7 @@
 use anyhow::{Result, Ok, anyhow};
 use clap::Parser;
-use xdiff::{cli::{Args, Action, RunArgs}, process_error_output, DiffConfig, highlight_text, diff_text};
+use dialoguer::{theme::ColorfulTheme, Input, MultiSelect};
+use xdiff::{cli::{Args, Action, RunArgs}, process_error_output, DiffConfig, LoadConfig, highlight_text, RequestProfile, ExtraArgs, DiffProfile, ResponseProfile};
 use std::io::Write;
 
 #[tokio::main]
@@ -53,6 +54,44 @@ async fn run(args: RunArgs) -> anyhow::Result<()> {
 }
 
 async fn parse() -> anyhow::Result<()> {
-  
+    let default = ColorfulTheme::default();
+    let url1:String = Input::with_theme(&default)
+        .with_prompt("Url1")
+        .interact_text()?;
+    let url2:String = Input::with_theme(&default)
+        .with_prompt("Url2")
+        .interact_text()?;
+
+    let req1: RequestProfile = url1.parse()?; 
+    let req2: RequestProfile = url2.parse()?; 
+
+    let name: String = Input::with_theme(&default)
+        .with_prompt("Profile")
+        .interact_text()?;
+
+    // 获取第一个请求header
+    let resp = req1.send(&ExtraArgs::default()).await?;
+    let headers = resp.get_header_keys();
+    let chosen = MultiSelect::with_theme(&default)
+        .with_prompt("Select headers to skip")
+        .items(&headers)
+        .interact()?;
+
+    let skip_headers = chosen.iter().map(|i| headers[*i].to_string()).collect();
+    let resp = ResponseProfile::new(skip_headers, vec![]);
+    let profile = DiffProfile::new(req1, req2, resp);
+    let config = DiffConfig::new(vec![(name, profile)].into_iter().collect());
+    
+    // config 转 result
+    let result = serde_yaml::to_string(&config)?;
+    
+    let stdout = std::io::stdout();
+    let mut stdout = stdout.lock();
+    if atty::is(atty::Stream::Stdout) {
+        write!(stdout, "---\n{}", highlight_text(&result, "yaml", None)?)?;
+    } else {
+        write!(stdout, "{}", result)?;
+    }
+
     Ok(())
 }
