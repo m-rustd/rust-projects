@@ -1,0 +1,23 @@
+[application]
+name = "Dioxus App"
+
+default_platform = "web"
+
+asset_dir = "assets"
+
+[web.app]
+title = "Dioxus Web App"
+
+[web.watcher]
+reload_html = true
+# watch_path = ["src/**/*"]
+
+[web.resource]
+style = [
+    "style.css"
+]
+
+[web.resource.dev]
+style = [
+    "style.css"
+]

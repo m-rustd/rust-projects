@@ -1,0 +1,29 @@
+[package]
+name = "dioxus-app"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+console_error_panic_hook = "0.1"
+dioxus = { version = "0.4", optional = true }
+dioxus-web = { version = "0.4", optional = true }
+dioxus-desktop = { version = "0.4", optional = true }
+tracing = "0.1"
+tracing-wasm = { version = "0.2", optional = true }
+tracing-subscriber = { version = "0.3", optional = true }
+chrono = { version = "0.4", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+reqwest = { version = "0.11", features = ["json"] }
+futures = "0.3"
+web-sys = { version = "0.3", features = ["Storage", "Location"], optional = true }
+
+[features]
+default = ["web"]
+web = ["dioxus", "dioxus-web", "tracing-wasm", "web-sys"]
+desktop = ["dioxus", "dioxus-desktop", "tracing-subscriber"]
+
+[profile.release]
+strip = "debuginfo"
