@@ -24,6 +24,13 @@ impl Default for Filter {
     }
 }
 
+#[cfg(feature = "desktop")]
+impl Default for Filter {
+    fn default() -> Self {
+        Filter::All
+    }
+}
+
 pub trait StoreTrait {
   fn get(&self) -> Todos;
   fn set(&self, items: &Todos);

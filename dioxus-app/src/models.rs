@@ -64,6 +64,38 @@ impl Todos {
             .collect()
     }
 
+    // 反选todo状态
+    pub fn toggle_todo(&mut self, id: u32) {
+        self.get_mut(&id).map(|todo| {
+            todo.completed = !todo.completed;
+        });
+        self.save();
+    }
+
+    // 更新todo
+    pub fn update_todo(&mut self, id: u32, title: impl Into<String>) {
+        self.get_mut(&id).map(|todo| {
+            todo.title = title.into();
+        });
+        self.save();
+    }
+
+    // items left
+    pub fn items_left(&self) -> usize {
+        self.iter().filter(|(_, todo)| !todo.completed).count()
+    }
+
+    // show clear completed
+    pub fn show_clear_completed(&self) -> bool {
+        self.iter().any(|(_, todo)| todo.completed)
+    }
+
+    // clear completed
+    pub fn clear_completed(&mut self) {
+        self.retain(|_, todo| !todo.completed);
+        self.save();
+    }
+
     // 保存数据到本地
     pub fn save(&self) {
         let store = get_store();
@@ -71,7 +103,7 @@ impl Todos {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Copy)]
 pub enum Filter {
     All,
     Active,

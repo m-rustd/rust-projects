@@ -7,12 +7,13 @@ edition = "2021"
 
 [dependencies]
 console_error_panic_hook = "0.1"
-dioxus = { version = "0.4", optional = true }
+dioxus = { version = "0.4" }
 dioxus-web = { version = "0.4", optional = true }
 dioxus-desktop = { version = "0.4", optional = true }
 tracing = "0.1"
 tracing-wasm = { version = "0.2", optional = true }
 tracing-subscriber = { version = "0.3", optional = true }
+wasm-bindgen = "0.2"
 chrono = { version = "0.4", features = ["serde"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
@@ -21,9 +22,10 @@ futures = "0.3"
 web-sys = { version = "0.3", features = ["Storage", "Location"], optional = true }
 
 [features]
-default = ["web"]
-web = ["dioxus", "dioxus-web", "tracing-wasm", "web-sys"]
-desktop = ["dioxus", "dioxus-desktop", "tracing-subscriber"]
+# 运行记得修改这里，不然会报错，暂时不知道原因
+default = ["desktop"] 
+web = ["dioxus-web", "tracing-wasm", "web-sys"]
+desktop = ["dioxus-desktop", "tracing-subscriber"]
 
 [profile.release]
 strip = "debuginfo"
