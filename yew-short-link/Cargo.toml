@@ -1,0 +1,21 @@
+[package]
+name = "yew-short-link"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+yew = {version = "0.21", features = ["csr"]}
+yew-router = "0.18"
+log = "0.4.17"
+wasm-logger = "0.2"
+console_error_panic_hook = "0.1.7"
+serde = {version = "1", features = ["derive"]}
+serde_json = "1"
+wasm-bindgen-futures = "0.4.30"
+# gloo-net = "0.2.4"
+# wasm-bindgen = "0.2.67"
+# gloo = "0.8"
+gloo-utils = "0.1.5"
+web-sys = "0.3.60"
