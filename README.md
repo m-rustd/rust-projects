@@ -9,3 +9,4 @@ rust练手小项目
 - web2image: 根据url生成图片并合并生成二维码
 - proc-marcos: 过程宏、drive宏、属性宏
 - yew-short-link: yew、tailwind
+- webcam: sycamore、访问摄像头
