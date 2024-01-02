@@ -10,3 +10,4 @@ rust练手小项目
 - proc-marcos: 过程宏、drive宏、属性宏
 - yew-short-link: yew、tailwind
 - webcam: sycamore、访问摄像头
+- desktop-webcam: tauri、js访问摄像头
