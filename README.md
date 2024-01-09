@@ -11,3 +11,4 @@ rust练手小项目
 - yew-short-link: yew、tailwind
 - webcam: sycamore、访问摄像头
 - desktop-webcam: tauri、js访问摄像头
+- trunk-learn: trunk wasm捆绑包的使用
