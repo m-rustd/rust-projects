@@ -12,3 +12,4 @@ rust练手小项目
 - webcam: sycamore、访问摄像头
 - desktop-webcam: tauri、js访问摄像头
 - trunk-learn: trunk wasm捆绑包的使用
+- tauri-quicke: 右键菜单
